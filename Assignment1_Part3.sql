@@ -13,8 +13,7 @@ SHOW TABLES;
 --Show the Employee Name, Department and Salary
 
 -----necessary to pull and match data from the 2 tables in the COMPANY1 database
-SELECT
-EMP.ENAME, EMP.SAL, DEPT.DNAME --identify columns required from 2 tables
+SELECT EMP.ENAME, EMP.SAL, DEPT.DNAME --identify columns required from 2 tables
 FROM EMP
 JOIN DEPT
 ON EMP.DEPTNO = DEPT.DEPTNO --join the 2 tables based on the matching department number
@@ -29,12 +28,12 @@ WHERE EMP.SAL > 1000 AND EMP.SAL < 2000; --use condition for salary range
 -----those who receive a salary
 SELECT COUNT(DEPTNO) AS COUNT_DEPT30_SAL --rename column name to be clear on function/purpose of data
 FROM EMP
-WHERE DEPTNO = '30' AND SAL>0;
+WHERE DEPTNO = '30' AND SAL>0; ---count entries where department number is 30 and where salary is not NULL or 0
 
 -----those who receive a commission
 SELECT COUNT(DEPTNO) AS COUNT_DEPT30_COMM ---rename column name to be clear on function/purpose of data
 FROM EMP
-WHERE DEPTNO = '30' AND COMM>0;
+WHERE DEPTNO = '30' AND COMM>0; ---count entries where department number is 30 and where salary is not NULL or 0
 
 
 
@@ -50,29 +49,24 @@ SELECT ENAME,SAL,DEPTNO FROM EMP WHERE DEPTNO = '20';
 
 --QUESTION 4: List all departments that do not have any employees
 ---dept40
+SELECT DEPTNO,DNAME FROM DEPT ---select the columns relevant to the query requirement
+WHERE DEPTNO NOT IN (SELECT DEPTNO FROM EMP); ---find the department number which is NOT listed in the EMP table
 
 
 
 --QUESTION 5: List the department number and average salary of each department
----to do this we need to perform a xx
 
 ---for department 10:
-SELECT
-AVG(SAL) AS SAL_AVERAGE,
-DEPTNO
+SELECT AVG(SAL) AS SAL_AVERAGE,DEPTNO ---use average function to find the average of each entry
 FROM COMPANY1.EMP
 WHERE DEPTNO = 10;
 
 ---for department 20:
-SELECT
-AVG(SAL) AS SAL_AVERAGE,
-DEPTNO
+SELECT AVG(SAL) AS SAL_AVERAGE,DEPTNO
 FROM COMPANY1.EMP
 WHERE DEPTNO = 20;
 
 ---for department 30;
-SELECT
-AVG(SAL) AS SAL_AVERAGE,
-DEPTNO
+SELECT AVG(SAL) AS SAL_AVERAGE,DEPTNO
 FROM COMPANY1.EMP
 WHERE DEPTNO = 30;
